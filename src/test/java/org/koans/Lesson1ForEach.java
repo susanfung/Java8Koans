@@ -29,6 +29,6 @@ public class Lesson1ForEach extends Koans
         yKnot = name;
       }
     }
-    assertEquals(yKnot, ___);
+    assertEquals(yKnot, "Zoidberg");
   }
 }

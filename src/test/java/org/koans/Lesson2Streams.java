@@ -24,18 +24,18 @@ public class Lesson2Streams extends Koans
       String format = "name[fun factor, effect] = %s[%s, %s]";
       System.out.println(String.format(format, item.Name, item.FunFactor, item.Effect));
     }
-    assertEquals("Firecrackers", objects.get(_____).Name);
+    assertEquals("Firecrackers", objects.get(2).Name);
   }
   @Test
   public void streamFilters()
   {
     Microwavable result = ObjectsInMicrowave().filter(x -> x.Name == "Ping Pong Ball").findFirst().get();
-    assertEquals(result.Name, ___);
+    assertEquals(result.Name, "Ping Pong Ball");
   }
   @Test
   public void filter()
   {
-    Microwavable result = ObjectsInMicrowave().filter(x -> x.Name == ___).findFirst().get();
+    Microwavable result = ObjectsInMicrowave().filter(x -> x.Name == "CD").findFirst().get();
     assertEquals("CD", result.Name);
   }
   @Test
@@ -43,7 +43,7 @@ public class Lesson2Streams extends Koans
   {
     Microwavable result = ObjectsInMicrowave()//
         .filter(oim -> oim.Effect.contains("S"))//
-        .map(oim -> ____)//
+        .map(oim -> oim)//
         .findFirst().get();
     assertEquals("CD", result.Name);
   }
@@ -52,7 +52,7 @@ public class Lesson2Streams extends Koans
   {
     String result = ObjectsInMicrowave()//
         .filter(x -> x.Name.startsWith("Fire"))//
-        .map(x -> x.___)//
+        .map(x -> x.Name)//
         .findFirst().get();
     assertEquals("Firecrackers", result);
   }
@@ -61,7 +61,7 @@ public class Lesson2Streams extends Koans
   {
     Object[] result = ObjectsInMicrowave()//
         .filter(x -> x.Effect == "Glows")//
-        .map(x -> new Object[]{x.Name, x.___})//
+        .map(x -> new Object[]{x.Name, x.Effect})//
         .findFirst().get();
     assertEquals("Glows", result[1]);
     assertEquals("Light Bulbs", result[0]);
@@ -77,7 +77,7 @@ public class Lesson2Streams extends Koans
   @Test
   public void betterSorting()
   {
-    Comparator<Microwavable> comparator = Comparator.comparing(m -> m.___);
+    Comparator<Microwavable> comparator = Comparator.comparing(m -> m.FunFactor);
     Microwavable result = ObjectsInMicrowave()//
         .sorted(comparator)//
         .findFirst().get();
@@ -92,13 +92,13 @@ public class Lesson2Streams extends Koans
         .sorted(byFun)//
         .sorted(thenByName.reversed())//
         .findFirst().get();
-    assertEquals(___, result.FunFactor);
+    assertEquals(1, result.FunFactor);
   }
   @Test
   public void MulitpleOrderBys()
   {
     Comparator<Microwavable> byFun = Comparator.comparing(m -> m.FunFactor);
-    Comparator<Microwavable> byName = Comparator.comparing(m -> m.___);
+    Comparator<Microwavable> byName = Comparator.comparing(m -> m.Name);
     Comparator<Microwavable> thenByName = byFun.reversed().thenComparing(byName.reversed());
     Microwavable result = ObjectsInMicrowave()//
         .sorted(thenByName)//

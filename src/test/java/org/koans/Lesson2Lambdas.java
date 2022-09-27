@@ -16,8 +16,8 @@ public class Lesson2Lambdas extends Koans
   @Test
   public void annomousFunctionPointers()
   {
-    Function<String, String> goodNews = Lesson2Lambdas::____;
-    assertEquals("Good News Everbody", goodNews.apply("Everybody"));
+    Function<String, String> goodNews = Lesson2Lambdas::staticGoodNews;
+    assertEquals("Good News Everybody", goodNews.apply("Everybody"));
   }
   public String goodNews(String name)
   {
@@ -26,8 +26,8 @@ public class Lesson2Lambdas extends Koans
   @Test
   public void annomousFunctionPointersOnObjects()
   {
-    Function<String, String> goodNews = this::_______;
-    assertEquals("Good News Everbody", goodNews.apply("Everybody"));
+    Function<String, String> goodNews = this::goodNews;
+    assertEquals("Good News Everybody", goodNews.apply("Everybody"));
   }
   @Test
   public void annomousClasses()
@@ -40,20 +40,20 @@ public class Lesson2Lambdas extends Koans
         return "Hi " + name;
       }
     };
-    assertEquals(___, hi.apply("Norm"));
+    assertEquals("Hi Norm", hi.apply("Norm"));
   }
   @Test
   public void annomousLambda()
   {
     Function<String, String> hi = (String name) -> {
-      return "Hi " + ___;
+      return "Hi " + name;
     };
     assertEquals("Hi Norm", hi.apply("Norm"));
   }
   @Test
   public void smallerLambda1()
   {
-    Function<String, String> hi = (____) -> {
+    Function<String, String> hi = (String name) -> {
       return "Hi " + name;
     };
     assertEquals("Hi Norm", hi.apply("Norm"));
@@ -61,14 +61,14 @@ public class Lesson2Lambdas extends Koans
   @Test
   public void smallerLambda2()
   {
-    Function<String, String> hi = (n) -> ___ + n;
+    Function<String, String> hi = (n) -> "Hi " + n;
     assertEquals("Hi Norm", hi.apply("Norm"));
   }
   @Test
   public void smallerLambda3()
   {
     Function<String, String> hi = n -> "Hi " + n;
-    assertEquals("Hi Norm", ______.apply("Norm"));
+    assertEquals("Hi Norm", hi.apply("Norm"));
   }
   public static interface Hello
   {
@@ -78,7 +78,7 @@ public class Lesson2Lambdas extends Koans
   public void anySingleMethodInterface()
   {
     Hello hi = n -> "Hi " + n;
-    assertEquals("Hi Norm", _______("Norm"));
+    assertEquals("Hi Norm", hi.greet("Norm"));
   }
   /********************************** helper code below ********************/
   /**
